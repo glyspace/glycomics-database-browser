@@ -1,0 +1,29 @@
+import pandas as pd
+import json
+
+# Function to split newlines in string fields
+def split_newlines(value):
+    if isinstance(value, str):
+        return value.split('\n')
+    return value
+
+if __name__ == "__main__":
+    file_path = input("Enter the XLS file name with full qualified path: ")
+    #C:\\pers\\Glycobiology_Resources.xlsx
+    print('filepath is ' + file_path)
+    df = pd.read_excel(file_path, sheet_name=0
+                       , names=['resource', 'datatype', 'topic_subentries', 'tools_subentries', 'data_subentries',
+                                'description', 'source', 'latest_pub', 'participants',
+                                'dependency'])  # 0 is first sheet
+
+    # Apply splitting to all columns
+    df = df.map(split_newlines)
+
+    #Convert Dataframe to JSON
+    json_data = df.to_json(orient='records', indent=2)
+
+    # Convert to JSON
+    # Write to file
+    json_file_path=input("Enter the target json file name with full qualified path: ")
+    with open(json_file_path, 'w') as f:
+        f.write(json_data)
