@@ -1,0 +1,1482 @@
+[
+  {
+    "resource_name":[
+      "ACGG-DB (includes previous Japanese JCCDB resource)"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "DNA sequence"
+    ],
+    "topic_subentries":[
+      "Diseases",
+      "Gene \/ Protein \/ Glycoprotein",
+      "Protocols"
+    ],
+    "tools_subentries":null,
+    "data_subentries":null,
+    "description":[
+      "Asian Community of GlycoScience and Glycotechnology.",
+      "ACGG serves as a platform of collaboration of researchers in Asian countries through sharing the technologies, resources, and information toward further advancement of glycoscience.",
+      "glycan structures, glyco-gene information, glycomics-related protocols, cross references"
+    ],
+    "source":[
+      "https:\/\/acgg\u200b.asia\/db\/"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "CAZy"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "cazyme"
+    ],
+    "topic_subentries":[
+      "Glycobiology",
+      "Carbohydrate-Active Enzymes",
+      "Annotation ",
+      "Curation",
+      "Genomics",
+      "Carbohydrate-binding",
+      "glycoside hydrolases, ",
+      "glycoside phosphorylases, ",
+      "transglycosidases, ",
+      "polysaccharide lyases ",
+      "lytic polysaccharide monooxygenases",
+      "Bioinformatics"
+    ],
+    "tools_subentries":[
+      "Query and Retrieval",
+      "Annotation",
+      "Curation",
+      "Classfication Standard",
+      " EC number system Search CAZac"
+    ],
+    "data_subentries":[
+      "Database",
+      "Carbohydrate Repository"
+    ],
+    "description":[
+      "carbohydrate-active enzymes",
+      "",
+      "The CAZy database describes the families of structurally-related catalytic and carbohydrate-binding modules (or functional domains) of enzymes that degrade, modify, or create glycosidic bonds.",
+      "",
+      "Carbohydrate-active enzymes database (CAZy ; http:\/\/www.cazy.org), a dedicated family classification system that correlate with the structure and molecular mechanism of CAZymes. Close to 300 families of catalytic and ancillary modules are presented online and correspond to over 100,000 non-redundant entries. "
+    ],
+    "source":[
+      "http:\/\/www\u200b.cazy.org"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "PULDB"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "Cazyme"
+    ],
+    "topic_subentries":[
+      "Polysaccharide Utilization Loci (PULs) ",
+      "Bacteroidetes",
+      "Genomics",
+      "susCD gene pairs",
+      "Glycans",
+      "CAZymes",
+      "PUL "
+    ],
+    "tools_subentries":[
+      "Prediction Tool",
+      "Search",
+      "Taxonomy Search"
+    ],
+    "data_subentries":[
+      "Database",
+      "Loci Database"
+    ],
+    "description":[
+      "Polysaccharide-Utilization Loci DataBase (PULDB)",
+      "",
+      "PULDB describes Polysaccharide Utilization Loci (PULs) experimentally characterized in the literature, but also 76,135 PUL predictions in 2,300 Bacteroidetes species.",
+      "A PUL is a set of physically-linked genes organized around a susCD gene pair. PULs are prevalent in the Bacteroidetes phylum. They provide an evolutionary advantage to these species by orchestrating the breakdown of complex glycans thanks to the encoded CAZymes. Please note that our PUL prediction tool tends to predict more PULs with multiple tandem susCD pairs than what is seen in experimentally determined cases."
+    ],
+    "source":[
+      "https:\/\/www.cazy.org\/PULDB\/"
+    ],
+    "latest_pub":[
+      "https:\/\/pubmed.ncbi.nlm.nih.gov\/29088389\/"
+    ],
+    "participants":[
+      "Terrapon N, Lombard V, ",
+      "Drula \u00c9, Lap\u00e9bie P, ",
+      "Al-Masaudi S, Gilbert HJ, ",
+      "Henrissat B"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "CFG"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "Lectins and glycan-binding"
+    ],
+    "topic_subentries":[
+      "Glycobiology",
+      "Functional Glycomics",
+      "Glycan Proteins",
+      "Glycan array",
+      "Glycopeptide microarrray",
+      "Bioinformatics"
+    ],
+    "tools_subentries":[
+      "Query and Retrieval"
+    ],
+    "data_subentries":[
+      "Web Application",
+      "Database",
+      ""
+    ],
+    "description":[
+      "glycan structures, MS profile, GlycanArray data, glyco-gene expression data",
+      "",
+      "Consortium for Functional Glycomics Database",
+      "",
+      "Analysis of potential Glycan-binding proteins (GBPs) on various glycan arrays (CFG glycan array, Microbial glycan array, NCFG-derived arrays)",
+      "",
+      "Structural analysis of glycans by mass spectrometry and chromatographic techniques.",
+      "",
+      "Production of naturally occurring glycans by isolation from natural products or by enzymatic modification of existing glycans.",
+      "",
+      "Printing custom Microarrays on glass slides using natural occurring glycans, commercially available glycans, or proteins and glycoproteins.",
+      "",
+      "Production of recombinant carbohydrate binding proteins by fermentation or cell culture.",
+      "",
+      "Analysis of qualitative and quantitative changes in glycans associated with diseases and disorders by Glycan Reductive Isotope Labeling (GRIL) and mass spectrometry."
+    ],
+    "source":[
+      "http:\/\/www\u200b.functionalglycomics.org",
+      "",
+      "https:\/\/research.bidmc.org\/ncfg"
+    ],
+    "latest_pub":null,
+    "participants":[
+      "Dr. Richard Cummings"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "ChEBI"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "small molecules"
+    ],
+    "topic_subentries":[
+      "Curation",
+      "Molecular Entity Search",
+      "Ontology"
+    ],
+    "tools_subentries":[
+      "Query and Retrieval"
+    ],
+    "data_subentries":[
+      "Database",
+      "Web Application "
+    ],
+    "description":[
+      "Chemical Entities of Biological Interest",
+      " A manually curated database and ontology of chemical entities",
+      "",
+      "Chemical Entities of Biological Interest (ChEBI) is a freely available dictionary of molecular entities focused on \u2018small\u2019 chemical compounds.",
+      "",
+      "The term 'molecular entity' encompasses any constitutionally or isotopically distinct atom, molecule, ion, ion pair, radical, radical ion, complex, conformer, etc., identifiable as a separately distinguishable entity. "
+    ],
+    "source":[
+      "https:\/\/www.ebi.ac.uk\/chebi\/",
+      "",
+      "https:\/\/www.ebi.ac.uk\/chebi\/beta\/"
+    ],
+    "latest_pub":26467479,
+    "participants":[
+      "Adnan Malik"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "CSDB (Carbohydrate Structure Database)"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "Glycan"
+    ],
+    "topic_subentries":[
+      "Carbohydrates",
+      "Taxonomy",
+      "NMR Signal",
+      "Carb Substructure",
+      "Carb Taxonomy ",
+      "Conformation maps Search"
+    ],
+    "tools_subentries":[
+      "NMR Prediction Tool",
+      "3D Molecular Visualization ",
+      "Substructure Search",
+      "NMR Signal Search"
+    ],
+    "data_subentries":[
+      "",
+      "Web Application ",
+      "Web Tools",
+      "Visualization"
+    ],
+    "description":[
+      "CSDB contains manually curated natural carbohydrate structures, taxonomy, bibliography, NMR, and other data from literature.",
+      "Coverage is close to complete up to: 2019 (bacteria, archaea, fungi), 1997 (plants).",
+      "Bacterial, fungi, and plant glycan structures, NMR data"
+    ],
+    "source":[
+      "http:\/\/csdb\u200b.glycoscience.ru\/"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "CSDB_GT"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "cazyme"
+    ],
+    "topic_subentries":[
+      "Carbohydrates",
+      "Enzymes"
+    ],
+    "tools_subentries":[
+      "Query and Retrieval"
+    ],
+    "data_subentries":[
+      "Database"
+    ],
+    "description":[
+      "glycosyltrasferase data for selected yeast, bacteria and plant species"
+    ],
+    "source":[
+      "http:\/\/csdb\u200b.glycoscience.ru\/gt.html"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "EUROCarbDB"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "Glycan"
+    ],
+    "topic_subentries":[
+      "glycobiology ",
+      "glycomics",
+      "Database Framework",
+      "Bioinformatics"
+    ],
+    "tools_subentries":[
+      "Reference",
+      "Documentation"
+    ],
+    "data_subentries":[
+      "Framework",
+      "Standard"
+    ],
+    "description":[
+      "initiative (ceased in 2011) seeded integrated tools for streamlining European glycomics research through the development of databases, bioinformatics standards, analysis methods, and Web-based software components."
+    ],
+    "source":[
+      "https:\/\/www.ncbi.nlm.nih.gov\/books\/NBK579995\/",
+      "",
+      "https:\/\/www.eurocarbdb.org\/"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "GAG-DB"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "Glycosaminoglycan"
+    ],
+    "topic_subentries":[
+      "Proteins & Proteomes",
+      "Glycomics",
+      "Glycopedia",
+      "GAG"
+    ],
+    "tools_subentries":[
+      "Query and Retireval",
+      "3D Modelling"
+    ],
+    "data_subentries":[
+      "Database"
+    ],
+    "description":[
+      "3D structures of GAG binding proteins",
+      "",
+      "3D curated data extracted from the PDB on glycosaminoglycan (GAG) and GAG gligosaccharides in interaction with proteins. GAG mimetics are included. The entries describe structures of GAGs and GAG protein complexes obtained by a wide range of methods. The database structure reflects the classification of GAGs.",
+      "",
+      ""
+    ],
+    "source":[
+      "https:\/\/gagdb\u200b.glycopedia.eu\/"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "GDGDB"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "DNA sequence"
+    ],
+    "topic_subentries":[
+      "Database",
+      "Genomics",
+      "Glycan",
+      ""
+    ],
+    "tools_subentries":[
+      "Query and Retireval"
+    ],
+    "data_subentries":[
+      "Database"
+    ],
+    "description":[
+      "Glyco-Disease Genes Database",
+      "",
+      "GDGDB is a database of glycan-related diseases and their responsible genes.",
+      "",
+      ""
+    ],
+    "source":null,
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "Glyco.me"
+    ],
+    "resource":[
+      "portal"
+    ],
+    "datatype":[
+      "glycoscience"
+    ],
+    "topic_subentries":[
+      "Glycomics",
+      "Gene, Enzyme, GlycoProtein interactions",
+      "Glycogenome",
+      "Glycosylation",
+      "Data Science "
+    ],
+    "tools_subentries":[
+      "Machine learning",
+      "Gene Activity Prediction",
+      "Data Mining"
+    ],
+    "data_subentries":[
+      "Knowledgebase"
+    ],
+    "description":[
+      "The Glyco.me resource enables an in silico approach to studying the glycome, dissecting the contributions of different genes, enzymes and glycoproteins to cellular functions in both health and disease."
+    ],
+    "source":[
+      "https:\/\/glyco.me\/",
+      "",
+      "https:\/\/pmc.ncbi.nlm.nih.gov\/articles\/PMC11321244\/table\/T1\/",
+      "",
+      "https:\/\/academic.oup.com\/database\/article\/doi\/10.1093\/database\/baae073\/7732847",
+      ""
+    ],
+    "latest_pub":29267884,
+    "participants":[
+      "Hiren Joshi"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "Glyco@Expasy"
+    ],
+    "resource":[
+      "portal"
+    ],
+    "datatype":[
+      "glycoscience"
+    ],
+    "topic_subentries":[
+      "Protein glycosylation",
+      "Glycan Tools, Databases",
+      "Bioinformatics",
+      "Glycan and Glycome",
+      "Glycoconjugates",
+      "Glycan Binding"
+    ],
+    "tools_subentries":[
+      "Knowledgebase",
+      "Resource Link"
+    ],
+    "data_subentries":[
+      "Website",
+      "Portal"
+    ],
+    "description":[
+      "The GlycoDomainViewer is a tool to help you answer the question of whether a protein you are interested in is glycosylated, and what that could mean for the function of the protein."
+    ],
+    "source":[
+      "https:\/\/glycoproteome.expasy.org\/glycomics-expasy\/"
+    ],
+    "latest_pub":30097532,
+    "participants":[
+      "Frederique Lisacek"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "Glyco3D"
+    ],
+    "resource":[
+      "portal"
+    ],
+    "datatype":[
+      "3D structure"
+    ],
+    "topic_subentries":[
+      "NMR Spectra",
+      "Glycan Determinants",
+      "Carbohydrates",
+      "Stereochemical configuration"
+    ],
+    "tools_subentries":[
+      "Query and Retrieval",
+      "Bioactive oligosaccharides Standard",
+      "3D Modelling"
+    ],
+    "data_subentries":[
+      "Database",
+      "Graphical Representation\/Visualization"
+    ],
+    "description":[
+      "3D structure database",
+      "",
+      "Glyco3D features a family of databases covering the 3D features of monos, di, oligo, polysaccharides, glycosyltransferases, lectins, monoclonal antibodies and glycosaminoglycan-binding proteins. Other databases are also made available that completes the picture of glycan 3D structure decoding. that are made freely available to the scientific community. A search engine has been developed that scans the full content of all the data bases for queries related to sequential information of the carbohydrates or other related descriptors. This database ensemble offers a unique opportunity to characterize the 3D features that a given oligosaccharide can assume in different environments."
+    ],
+    "source":[
+      "http:\/\/glyco3d\u200b.cermav.cnrs.fr\/home.php"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "GlycodomainViewer"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "glycoprotein"
+    ],
+    "topic_subentries":[
+      "Proteomics",
+      "Glycoproteomics",
+      "Poly-Omics"
+    ],
+    "tools_subentries":[
+      "Data Retrieval",
+      "Visualization",
+      "Glycosylation site analysis"
+    ],
+    "data_subentries":[
+      "Database",
+      "Knowledgebase"
+    ],
+    "description":[
+      "The GlycoDomainViewer is a tool to help you answer the question of whether a protein you are interested in is glycosylated, and what that could mean for the function of the protein.",
+      "",
+      "The GlycoDomainViewer brings to the community an integrative tool for glycoproteomics that enables global analysis of the interplay between protein sequences, glycosites, types of glycosylation, and local protein fold \/ domain and other PTM context. The GlycoDomainViewer integrates poly-Omics data sets and enables exploration and visualisation of individual glycosites on proteins from many organisms. We provide a visual representation of protein context around glycosites, automatically managing the amount of information that is drawn so that data remains comprehensible. The tool aggregates and presents data produced experimentally as well as retrieved from other databases, with a view to presenting the maximum amount of relevant protein and post-translational modification (PTM) information available to explore the possible effects of glycosylation on a protein. In order to focus upon protein context, only initiating monosaccharides are shown, with limited glycan elaboration (i.e. T structures).",
+      "",
+      ""
+    ],
+    "source":[
+      "https:\/\/glyco.me\/glycodomain\/",
+      "",
+      "https:\/\/glycodomain\u200b.glycomics.ku.dk\/"
+    ],
+    "latest_pub":29267884,
+    "participants":[
+      "Hiren Joshi"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "GlycoEnzDB"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "pathway"
+    ],
+    "topic_subentries":[
+      "GlycosyIT",
+      "Other Transferases",
+      "Modifying Enzyme ",
+      "Glycosidase",
+      "Transporter",
+      "Regulator"
+    ],
+    "tools_subentries":[
+      "Gene Pathway Map"
+    ],
+    "data_subentries":[
+      "Glyoenzyme Database",
+      "Database"
+    ],
+    "description":[
+      "glycan enzyme definitions and use in pathway building"
+    ],
+    "source":[
+      "https:\/\/virtualglycome.org\/glycoenzdb\/"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "GlycoEpitope"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "Glycan-binding"
+    ],
+    "topic_subentries":[
+      "carbohydrate antigens",
+      "glyco-epitopes, ",
+      "antibodies "
+    ],
+    "tools_subentries":[
+      "encyclopedia",
+      "Knowledgebase"
+    ],
+    "data_subentries":[
+      "Database",
+      "Knowledgebase"
+    ],
+    "description":[
+      "glycan epitopes",
+      "",
+      "In this database, useful information on these carbohydrate antigens, i.e. glyco-epitopes, and antibodies has been assembled as a compact encyclopedia."
+    ],
+    "source":[
+      "http:\/\/www\u200b.glycoepitope.jp"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "GlycoGene Database"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "DNA sequence"
+    ],
+    "topic_subentries":[
+      "glycosyltransferase, ",
+      "sugar-nucleotide transporters, ",
+      " sulfotransferases."
+    ],
+    "tools_subentries":[
+      "glycan synthesis,",
+      "sugar nucleotide synthases"
+    ],
+    "data_subentries":[
+      "Database",
+      "Knowledgebase"
+    ],
+    "description":[
+      "A database which includes genes associated with glycan synthesis such as glycosyltransferase, sugar nucleotide synthases, sugar-nucleotide transporters, and sulfotransferases."
+    ],
+    "source":null,
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "GlycomeDB"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "Glycan"
+    ],
+    "topic_subentries":[
+      "Glycan Structure",
+      "Deprecated"
+    ],
+    "tools_subentries":[
+      "Deprecated"
+    ],
+    "data_subentries":[
+      "Deprecated with GlyTouCan"
+    ],
+    "description":[
+      "With the implementation of GlyTouCan the mission of GlycomeDB comes to an end.",
+      "",
+      "GlycomeDB integrates the structural and taxonomic data of all major public carbohydrate databases, as well as carbohydrates contained in the Protein Data Bank, which renders the database currently the most comprehensive and unified resource for carbohydrate structures worldwide. GlycomeDB retains the links to the original databases and is updated at weekly intervals with the newest structures available from the source databases. The complete database can be downloaded freely or accessed through a Web-interface (www.glycome-db.org) that provides flexible and powerful search functionalities."
+    ],
+    "source":[
+      "https:\/\/pubmed.ncbi.nlm.nih.gov\/21045056\/",
+      "",
+      "http:\/\/www.glycome-db.org\/"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "Glycomotif"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "Glycan"
+    ],
+    "topic_subentries":[
+      "Annotation",
+      "Whole-Glycan",
+      "Motif"
+    ],
+    "tools_subentries":null,
+    "data_subentries":[
+      "Repository",
+      "Knowledgebase"
+    ],
+    "description":[
+      "Collections of glycan determinants and motifs sourced from many different glycoinformatics resources."
+    ],
+    "source":[
+      "http:\/\/glycomotif.glyomics.org\/"
+    ],
+    "latest_pub":null,
+    "participants":[
+      "Nathan Edwards"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "GlyConnect"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "glycan and glycoprotein"
+    ],
+    "topic_subentries":[
+      "glycoproteins spanning protein",
+      "glycosite ",
+      "glycan",
+      "SNFG Nomenclature",
+      "Glycan Tissue Relationship",
+      "oligosaccharides",
+      "immunoglobulins",
+      "Brain"
+    ],
+    "tools_subentries":[
+      "Webservice",
+      "Query and Retrieval",
+      "Dataset"
+    ],
+    "data_subentries":[
+      "Repository",
+      "Knowledgebase",
+      "Rest API",
+      "SPARQL API",
+      "Specialized databases"
+    ],
+    "description":[
+      "GlyConnect is a platform designed to investigate the relationships between glycans, the proteins that carry them and the proteins that bind them via the UniLectin sister project. The underlying database stores curated data on glycosylation extracted from literature and preserving the contextual information relative to species, original cell line, tissue and disease.",
+      " ",
+      " GlyConnect is the central resource of the Glyco@Expasy collection hosted at SIB - Swiss Institute of Bioinformatics.",
+      "",
+      "literature-based curated glycan structures, glycoproteins, glycosylation sites, and glycome expression"
+    ],
+    "source":[
+      "https:\/\/glyconnect.expasy.org\/"
+    ],
+    "latest_pub":30574787,
+    "participants":[
+      "Frederique Lisacek"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "GlycoProtDB"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "glycoprotein"
+    ],
+    "topic_subentries":[
+      " glycopeptide sequences ",
+      "LC\/MS",
+      "glycoproteomics"
+    ],
+    "tools_subentries":[
+      "Query and Retrieval"
+    ],
+    "data_subentries":[
+      "Database"
+    ],
+    "description":[
+      "GlycoProtDB is a glycoprotein database providing information of Asn (N)-glycosylated proteins and their glycosylated site(s), which were constructed by employing a bottom-up strategy using actual glycopeptide sequences identified by LC\/MS-based glycoproteomic technologies. ",
+      "",
+      ""
+    ],
+    "source":[
+      "virtualglycome.org\/glycoenzdb\/",
+      "",
+      ""
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "GlycoShape"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "3D structure"
+    ],
+    "topic_subentries":null,
+    "tools_subentries":null,
+    "data_subentries":null,
+    "description":[
+      "GlycoShape is an OA database of glycans 3D structural data and information that can be downloaded or used with Re-Glyco to rebuild glycoproteins from the RCSB PDB or EMBL-EBI AlphaFold repositories"
+    ],
+    "source":[
+      "https:\/\/glycoshape.org\/"
+    ],
+    "latest_pub":[
+      "https:\/\/doi.org\/10.1101\/2023.12.11.571101"
+    ],
+    "participants":[
+      "Callum Ives, Elisa Fadda (remote)"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "GlyGen Sandbox"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "Glycan"
+    ],
+    "topic_subentries":[
+      "Linked glycans",
+      "Biosynthesis",
+      "GlyTouCan"
+    ],
+    "tools_subentries":[
+      "Model Access"
+    ],
+    "data_subentries":[
+      "Database"
+    ],
+    "description":[
+      "The Glygen Sandbox allows detailed exploration of glycan structure and biosynthesis."
+    ],
+    "source":[
+      "http:\/\/sandbox.glyomics.org\/"
+    ],
+    "latest_pub":null,
+    "participants":[
+      "Nathan Edwards"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "ICL Glycan Microarrays"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "Glycan"
+    ],
+    "topic_subentries":[
+      "Carbohydrate",
+      "Oligiosaccharide",
+      "Ligands",
+      "Protein",
+      "Pathogen\/Antigen",
+      "Glycan"
+    ],
+    "tools_subentries":[
+      "Screening analyses",
+      ""
+    ],
+    "data_subentries":null,
+    "description":[
+      "The microarray system contains oligosaccharide probes, natural and synthetic, encompassing sequences found on glycoproteins, glycolipids, and glycosaminoglycans, also those derived from glucan polysaccharides of fungi, bacteria and plants. Currently, these number approximately 830 sequence-defined probes and are increasing. A list of oligosaccharide probes is available via our online display and searching system."
+    ],
+    "source":[
+      "https:\/\/www.imperial.ac.uk\/glycosciences\/",
+      "https:\/\/glycosciences.med.ic.ac.uk\/glycanLibraryIndex.html"
+    ],
+    "latest_pub":null,
+    "participants":[
+      "Ten Feizi,",
+      "Yan Liu,",
+      "Yukie Akune",
+      ""
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "IMGT"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "immunoglobulins"
+    ],
+    "topic_subentries":[
+      "Immunogenetics",
+      "Immunoinformatics",
+      "Immune response"
+    ],
+    "tools_subentries":[
+      "Unified Resource"
+    ],
+    "data_subentries":[
+      "Database\/ Ontology"
+    ],
+    "description":[
+      "IMGT\u00ae is a pioneering international information system in immunogenetics and immunoinformatics. It provides databases and tools based on the IMGT-ONTOLOGY to the scientific community for in-depth exploration of the adaptive immune response. IMGT\u00ae is dedicated to advancing scientific knowledge through its three main axes of research and development."
+    ],
+    "source":[
+      "https:\/\/www.imgt.org\/"
+    ],
+    "latest_pub":34875068,
+    "participants":[
+      "Taciana Manso (remote),",
+      "Sofia Kossida (remote)"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "Immune Epitope Database and Analysis Project (IEDB)"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "binding"
+    ],
+    "topic_subentries":[
+      "T Cells",
+      "Infectious Disease",
+      "Allergy ",
+      "Autoimmunity"
+    ],
+    "tools_subentries":[
+      "Query and retrieval"
+    ],
+    "data_subentries":[
+      "Database",
+      "Knowledgebase"
+    ],
+    "description":[
+      "The Immune Epitope Database (IEDB) is a freely available resource funded by NIAID. It catalogs experimental data on antibody and T cell epitopes studied in humans and other animal species in the context of infectious disease, allergy, autoimmunity and transplantation. The IEDB also hosts epitope prediction and analysis tools, and has a companion site, CEDAR (funded by NCI), which houses cancer epitopes."
+    ],
+    "source":[
+      "https:\/\/www.iedb.org\/"
+    ],
+    "latest_pub":30357391,
+    "participants":[
+      "Randi Vita"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "IntAct"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "binding"
+    ],
+    "topic_subentries":[
+      "Molecular interactions",
+      "Uniprot",
+      "Genes"
+    ],
+    "tools_subentries":[
+      "Query and retrieval",
+      "Visualization"
+    ],
+    "data_subentries":[
+      "Database",
+      "Knowedgebase",
+      "Data visualization"
+    ],
+    "description":[
+      "IntAct provides a free, open source database system and analysis tools for molecular interaction data. All interactions are derived from literature curation or direct user submissions. The IntAct Team also produces the Complex Portal. You are currently visiting the new website of IntAct. The former version can be found here and will be supported until the end of 2023."
+    ],
+    "source":[
+      "https:\/\/www.ebi.ac.uk\/intact"
+    ],
+    "latest_pub":34761267,
+    "participants":[
+      "Kalpana Panneerselvam"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "iPTMnet"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "protein"
+    ],
+    "topic_subentries":[
+      "Protein",
+      "Phosphorylation"
+    ],
+    "tools_subentries":[
+      "Text\/Data mining",
+      "Analysis\/Visualization"
+    ],
+    "data_subentries":[
+      "Database",
+      "Ontology",
+      "Data visualization",
+      "Graphical User Interface"
+    ],
+    "description":[
+      "iPTMnet is a bioinformatics resource for integrated understanding of protein post-translational modifications (PTMs) in systems biology context."
+    ],
+    "source":[
+      "https:\/\/research.bioinformatics.udel.edu\/iptmnet\/"
+    ],
+    "latest_pub":29145615,
+    "participants":[
+      "Cecilia Arighi"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "MatrixDB"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "proteoglycans"
+    ],
+    "topic_subentries":[
+      "Proteins",
+      "Proteoglycans",
+      "Glycosaminoglycans",
+      "Bioactive ECM Fragments",
+      "Polypeptides"
+    ],
+    "tools_subentries":null,
+    "data_subentries":null,
+    "description":[
+      "MatrixDB is a curated interaction database focused on experimentally supported interactions mediated by the components of the extracellular matrix (ECM), namely proteins, proteoglycans, glycosaminoglycans, and bioactive ECM fragments collectively referred to as matrikines or matricryptins. It curate interactions with individual polypeptide chains or with native multimeric proteins (e.g. collagens, laminins, thrombospondins) when appropriate. Multimers are treated as permanent complexes."
+    ],
+    "source":[
+      "http:\/\/matrixdb\u200b.univ-lyon1.fr\/"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "MonosaccharideDB"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "Glycan"
+    ],
+    "topic_subentries":[
+      "Glycan Database",
+      "Glycan Residues",
+      "Carbohydrates"
+    ],
+    "tools_subentries":[
+      "Query and Retrieval",
+      "Carbohydrate Report"
+    ],
+    "data_subentries":[
+      "Database Web Portal"
+    ],
+    "description":[
+      "repertoire of monosaccharides"
+    ],
+    "source":[
+      "http:\/\/www\u200b.monosaccharidedb.org",
+      "",
+      "https:\/\/bio.tools\/monosaccharidedb"
+    ],
+    "latest_pub":30357361,
+    "participants":[
+      "Thomas L\u00fctteke (remote)"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "NCFG\u2014Glybrary"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "Glycan"
+    ],
+    "topic_subentries":[
+      "Glycan Data"
+    ],
+    "tools_subentries":[
+      "Data creation\/modification"
+    ],
+    "data_subentries":[
+      "Data Management"
+    ],
+    "description":[
+      "Glybrary is glycan centric data management platform created by the National Center for Functional Glycomics.",
+      " Glybrary is supported by NIH grants R24GM137763 and U01GM125267"
+    ],
+    "source":[
+      "https:\/\/www.glybrary.com"
+    ],
+    "latest_pub":null,
+    "participants":[
+      "Akul Mehta (remote)"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "O-GlcNAcAtlas"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "protein"
+    ],
+    "topic_subentries":[
+      "O-GlcNAcylated Proteins ",
+      "O-GlcNAcylated Sites",
+      "Dataset"
+    ],
+    "tools_subentries":[
+      "Search Engine"
+    ],
+    "data_subentries":[
+      "Web Search Engine",
+      "Database"
+    ],
+    "description":[
+      "Search O-GlcNAc sites of proteins, quickly and reliably",
+      "Database of O-GlcNAcylated Proteins and Sites",
+      "",
+      "Protein O-GlcNAcylation has been documented in all metazoans (including animals, insects, and plants), some bacteria, fungi, and viruses. O-GlcNAcylation occurs on many proteins in nuclear, cytosolic, and mitochondria. As a critical modification, O-GlcNAc functions in a species-, tissue-\/cell-, protein-, and site-specific manner."
+    ],
+    "source":[
+      "https:\/\/oglcnac.org\/atlas\/"
+    ],
+    "latest_pub":33442735,
+    "participants":[
+      "Junfeng Ma (remote)"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "OGT-PIN"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "protein"
+    ],
+    "topic_subentries":[
+      "O-GlcNAcase",
+      "OGT biology, protein ",
+      "O-GlcNAcylation",
+      "functional elucidation",
+      ""
+    ],
+    "tools_subentries":[
+      "Search Engine"
+    ],
+    "data_subentries":[
+      "Web Search Engine",
+      "Database"
+    ],
+    "description":[
+      "OGT Protein Interaction Network (OGT-PIN) is a curated and comprehensive database of experimentally identified interaction proteins of OGT and its orthologues in multiple species studied in the past several decades.",
+      "",
+      "Interactions between proteins are essential to any cellular process and constitute the basis for molecular networks that determine the functional state of a cell. Defining the interactome of OGT, the sole enzyme adding the O-GlcNAc onto its target proteins, can facilitate studies in OGT biology, protein O-GlcNAcylation, functional elucidation of proteins\/pathways\/processes, drug development, and others."
+    ],
+    "source":[
+      "https:\/\/oglcnac.org\/ogt-pin"
+    ],
+    "latest_pub":33442735,
+    "participants":[
+      "Junfeng Ma (remote)"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "PubChem"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "small molecules"
+    ],
+    "topic_subentries":[
+      "Molecular properties"
+    ],
+    "tools_subentries":[
+      "Query and Retrieval",
+      "Unified Resources",
+      ""
+    ],
+    "data_subentries":[
+      "Search Engine"
+    ],
+    "description":[
+      "PubChem is the world's largest collection of freely accessible chemical information. Search chemicals by name, molecular formula, structure, and other identifiers. Find chemical and physical properties, biological activities, safety and toxicity information, patents, literature citations and more."
+    ],
+    "source":[
+      "https:\/\/pubchem.ncbi.nlm.nih.gov"
+    ],
+    "latest_pub":36305812,
+    "participants":[
+      "Evan Bolton (remote)"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "Rhea"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "pathway"
+    ],
+    "topic_subentries":[
+      "Enzyme",
+      "Chemical",
+      "Sequence"
+    ],
+    "tools_subentries":[
+      "Query and Retrieval",
+      "Prediction Tool",
+      "Visualization"
+    ],
+    "data_subentries":[
+      "Search Engine",
+      "Data Visualization"
+    ],
+    "description":[
+      "Rhea is an expert-curated knowledgebase of chemical and transport reactions of biological interest - and the standard for enzyme and transporter annotation in UniProtKB. Rhea uses the chemical dictionary ChEBI (Chemical Entities of Biological Interest) to describe reaction participants."
+    ],
+    "source":[
+      "https:\/\/www.rhea-db.org\/"
+    ],
+    "latest_pub":34755880,
+    "participants":[
+      "Kristian Axelsen,"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "UniCarb-DB"
+    ],
+    "resource":[
+      "database"
+    ],
+    "datatype":[
+      "MS"
+    ],
+    "topic_subentries":[
+      "Glycan",
+      "Carbohydrates",
+      "Peptides"
+    ],
+    "tools_subentries":[
+      "Query and Retrieval"
+    ],
+    "data_subentries":[
+      "Database"
+    ],
+    "description":[
+      "UniCarb-DB stores data and information on glycan structures and associated fragment data characterised by LC-MS\/MS strategies. It is annotated with high-quality datasets."
+    ],
+    "source":[
+      "https:\/\/www\u200b.expasy.org\u200b\/resources\/unicarb-db"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "UniCarbKB"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "Pathway"
+    ],
+    "topic_subentries":[
+      "carbohydrates",
+      "glycoproteins"
+    ],
+    "tools_subentries":[
+      "Query and Retrieval",
+      "Analytical Tool"
+    ],
+    "data_subentries":[
+      "Search Engine",
+      "Data Managemnet",
+      "Data Visualization"
+    ],
+    "description":[
+      "UniCarbKB is a dedicated resource for the glycobiology and glycomics research community, offering a wealth of information on carbohydrate structures, glycoprotein analysis, and glycosylation pathways. As the field of glycomics rapidly evolves, UniCarbKB serves as a vital platform, helping researchers access high-quality, curated data to advance their understanding of the complex world of carbohydrates and their roles in biological systems."
+    ],
+    "source":[
+      "http:\/\/www\u200b.unicarbkb.org"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "UniLectin"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "Lectins"
+    ],
+    "topic_subentries":[
+      "Lectins"
+    ],
+    "tools_subentries":[
+      "Query and Retrieval",
+      "Visualization"
+    ],
+    "data_subentries":[
+      "Database",
+      "Data Management",
+      "Data Visualization",
+      "Search Engine"
+    ],
+    "description":[
+      "A knowledge base of curated and predicted lectins."
+    ],
+    "source":[
+      "https:\/\/unilectin.unige.ch\/"
+    ],
+    "latest_pub":33174598,
+    "participants":[
+      "Frederique Lisacek, Anne Imberty"
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "UniProtKB"
+    ],
+    "resource":[
+      "Knowledgebase"
+    ],
+    "datatype":[
+      "Proteins"
+    ],
+    "topic_subentries":[
+      "Protein",
+      "Proteomics",
+      "Peptide"
+    ],
+    "tools_subentries":[
+      "Query and Retrieval",
+      "Visualization"
+    ],
+    "data_subentries":[
+      "Database",
+      "Data Management",
+      "Data Visualization",
+      "Search Engine"
+    ],
+    "description":[
+      "The Universal Protein Resource (UniProt) is a comprehensive resource for protein sequence and annotation data. The UniProt databases are the UniProt Knowledgebase (UniProtKB), the UniProt Reference Clusters (UniRef), and the UniProt Archive (UniParc). The UniProt consortium and host institutions EMBL-EBI, SIB and PIR are committed to the long-term preservation of the UniProt databases."
+    ],
+    "source":[
+      "https:\/\/www.uniprot.org"
+    ],
+    "latest_pub":36408920,
+    "participants":[
+      "Maria Martin,",
+      "Cecilia Arighi,",
+      "Kristian Axelsen,",
+      "Alan Bridge (remote)",
+      ""
+    ],
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "CarbBank"
+    ],
+    "resource":[
+      "Database"
+    ],
+    "datatype":[
+      "carbohydrates"
+    ],
+    "topic_subentries":[
+      "Carbohydrates"
+    ],
+    "tools_subentries":[
+      "Data Retrieval"
+    ],
+    "data_subentries":[
+      "Database"
+    ],
+    "description":[
+      "The very first carbohydrate database was called CCSD, for Complex Carbohydrate Structure Database (1, 2). However, because of the tool used to access this database, called CarbBank, it is more commonly known as CarbBank. This database was initially developed by the Complex Carbohydrate Research Center at the University of Georgia. It was the first attempt to accumulate such data from the research community, and it thus became a valuable resource for current carbohydrate databases. Unfortunately, funding for CCSD ceased in 1996, but the data, consisting of almost 45,000 entries of glycan structures, annotation, and literature information, were still made available to the public."
+    ],
+    "source":[
+      "https:\/\/pubmed.ncbi.nlm.nih.gov\/23325765\/"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  },
+  {
+    "resource_name":[
+      "SugarBind"
+    ],
+    "resource":[
+      "database"
+    ],
+    "datatype":null,
+    "topic_subentries":null,
+    "tools_subentries":null,
+    "data_subentries":null,
+    "description":[
+      "curated information on pathogen\u2013glycan binding"
+    ],
+    "source":[
+      "http:\/\/sugarbind\u200b.expasy.org\/"
+    ],
+    "latest_pub":null,
+    "participants":null,
+    "dependency":null
+  }
+]
