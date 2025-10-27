@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>D3 Left-to-Right Tree</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    svg {
+      width: 80vw;
+      height: 100vh;
+      float: left;
+      background: #fafafa;
+    }
+
+    .node rect {
+      stroke: steelblue;
+      stroke-width: 2px;
+      cursor: pointer;
+      rx: 5px;
+      ry: 5px;
+    }
+
+    .node:hover rect {
+      opacity: 0.8;
+    }
+
+    .node text {
+      font-size: 12px;
+      fill: white;
+      pointer-events: none;
+      text-anchor: middle;
+      alignment-baseline: middle;
+    }
+
+    .link {
+      fill: none;
+      stroke: #ccc;
+      stroke-width: 2px;
+    }
+
+    #details-box {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 20vw;
+      height: 100vh;
+      background: #fff;
+      border-left: 2px solid #999;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    }
+    #topics-box {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80vw;
+      height: 20vh;
+      background: #fff;
+      border-top: 2px solid #999;
+      padding: 10px;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+      font-size: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .tool {
+      padding: 5px 10px;
+      margin: 5px;
+      border-radius: 4px;
+      background: #ddd;
+      font-weight: bold;
+    }
+
+    .highlight {
+      background: orange;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <svg></svg>
+  <div id="topics-box"></div>
+  <div id="details-box"><em>Hover over a leaf node to see details here</em></div>
+
+  <script>
+    const width = window.innerWidth * 0.8;
+    const height = window.innerHeight;
+    const svg = d3.select("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+    const g = svg.append("g").attr("transform", "translate(50,50)");
+    const treeLayout = d3.tree().size([height - 100, width - 200]); // left-to-right
+    let i = 0;
+    let root;
+    let allTopics = new Set();
+
+    const levelColors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"];
+
+    d3.json("data.json").then(rawData => {
+      const grouped = d3.group(rawData.resources, d => d.resource);
+
+      const data = {
+        name: rawData.name,
+        children: Array.from(grouped, ([type, items]) => ({
+          name: type,
+          children: items.map(item => {
+            item.topics.forEach(t => allTopics.add(t)); // collect all tools
+            return {
+              name: item.resource_name,
+              details: {
+                Description: item.description,
+                Subentries: item.data_subentries,
+                URL: item.url
+              },
+              topics: item.topics
+            }
+          })
+        }))
+      };
+    
+
+      root = d3.hierarchy(data);
+      root.x0 = height / 2;
+      root.y0 = 0;
+
+      root.children.forEach(collapse);
+      update(root);
+      drawToolBox(Array.from(allTopics));
+
+    });
+
+    function collapse(d) {
+      if (d.children) {
+        d._children = d.children;
+        d._children.forEach(collapse);
+        d.children = null;
+      }
+    }
+
+    function update(source) {
+      const treeData = treeLayout(root);
+      const nodes = treeData.descendants();
+      const links = treeData.links();
+
+      // Swap x/y for left-to-right layout
+      nodes.forEach(d => {
+        const temp = d.x;
+        d.x = d.y;
+        d.y = temp;
+      });
+
+      const node = g.selectAll('g.node')
+        .data(nodes, d => d.id || (d.id = ++i));
+
+      const nodeEnter = node.enter().append('g')
+        .attr('class','node')
+        .attr('transform', d => `translate(${source.x0},${source.y0})`)
+        .on('click', (event, d) => {
+          if (d.children) {
+            d._children = d.children;
+            d.children = null;
+          } else {
+            d.children = d._children;
+            d._children = null;
+          }
+          update(d);
+        })
+        .on('mouseover', (event,d) => {
+          if (!d.children && !d._children && d.data.details) {
+            const tooltip = d3.select("#details-box");
+            const details = Object.entries(d.data.details)
+              .map(([k,v]) => `<p><strong>${k}:</strong> ${v}`).join("<br/></p>");
+            tooltip.html(`<strong><u>${d.data.name}</u></strong><br/>${details}`);
+
+            highlightTools(d.data.topics || []);
+
+          }
+        });
+
+      const rectWidth = 180;
+      const rectHeight = 30;
+
+      nodeEnter.append('rect')
+        .attr('width', rectWidth)
+        .attr('height', rectHeight)
+        .attr('x', -rectWidth/2)
+        .attr('y', -rectHeight/2)
+        .style('fill', d => levelColors[d.depth] || "#888");
+
+      //wordwrap label inside rectangle
+      nodeEnter.append('text')
+        .attr('dy',0)
+        .each(function(d) {
+          const words = d.data.name.split(/\s+/);
+          const lineHeight = 14; // px
+          let tspan = d3.select(this).append('tspan')
+            .attr('x', 0)
+            .attr('y', 0);
+          words.forEach((word, i) => {
+            if (i === 0) {
+              tspan.text(word);
+            } else {
+              tspan = d3.select(this).append('tspan')
+                .attr('x', 0)
+                .attr('y', i * lineHeight)
+                .text(word);
+            }
+          });
+        });
+
+      const nodeUpdate = nodeEnter.merge(node);
+      nodeUpdate.transition().duration(500)
+        .attr('transform', d => `translate(${d.x},${d.y})`);
+
+      nodeUpdate.select('rect')
+        .style('fill', d => levelColors[d.depth] || "#888");
+
+      const nodeExit = node.exit().transition()
+        .duration(500)
+        .attr('transform', d => `translate(${source.x},${source.y})`)
+        .remove();
+      nodeExit.select('rect').attr('width',0).attr('height',0);
+      nodeExit.select('text').style('fill-opacity',1e-6);
+
+      const link = g.selectAll('path.link')
+        .data(links, d => d.target.id);
+
+      const linkEnter = link.enter().insert('path','g')
+        .attr('class','link')
+        .attr('d', d => { const o={x:source.x0,y:source.y0}; return diagonal(o,o); });
+
+      const linkUpdate = linkEnter.merge(link);
+      linkUpdate.transition().duration(500).attr('d', d => diagonal(d.source,d.target));
+
+      link.exit().transition().duration(500)
+        .attr('d', d => { const o={x:source.x,y:source.y}; return diagonal(o,o); })
+        .remove();
+
+      nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
+    }
+
+    function diagonal(s,d){
+      return `M ${s.x} ${s.y}
+              C ${(s.x+d.x)/2} ${s.y},
+                ${(s.x+d.x)/2} ${d.y},
+                ${d.x} ${d.y}`;
+    }
+    function drawToolBox(topics) {
+      const box = d3.select("#topics-box");
+      box.selectAll("div.tool")
+        .data(topics)
+        .enter()
+        .append("div")
+        .attr("class","tool")
+        .attr("id", d => "tool-"+d)
+        .text(d => d);
+    }
+    function highlightTools(activeTools) {
+      d3.selectAll("#topics-box .tool")
+        .classed("highlight", d => activeTools.includes(d));
+    }
+  </script>
+</body>
+</html>
