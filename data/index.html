@@ -1,275 +1,452 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>D3 Left-to-Right Tree</title>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      overflow: hidden;
-    }
+<meta charset="UTF-8">
+<title>D3 Interactive Tree with Controls</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    overflow: hidden;
+    background: #f5f5f5;
+  }
 
-    svg {
-      width: 80vw;
-      height: 100vh;
-      float: left;
-      background: #fafafa;
-    }
 
-    .node rect {
-      stroke: steelblue;
-      stroke-width: 2px;
-      cursor: pointer;
-      rx: 5px;
-      ry: 5px;
-    }
 
-    .node:hover rect {
-      opacity: 0.8;
-    }
+#svg-container {
+  width: 80vw;
+  height: calc(100vh - 60px - 20vh); /* header + topics box */
+  float: left;
+  background: linear-gradient(to bottom, #eaf2fb, #ffffff);
+  overflow-y: auto;  /* enable vertical scroll */
+  overflow-x: hidden;
+  position: relative;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  margin-top: 60px; /* account for header */
+}
 
-    .node text {
-      font-size: 12px;
-      fill: white;
-      pointer-events: none;
-      text-anchor: middle;
-      alignment-baseline: middle;
-    }
 
-    .link {
-      fill: none;
-      stroke: #ccc;
-      stroke-width: 2px;
-    }
+  svg {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+  }
 
-    #details-box {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 20vw;
-      height: 100vh;
-      background: #fff;
-      border-left: 2px solid #999;
-      padding: 10px;
-      overflow-y: auto;
-      font-size: 14px;
-      box-shadow: -2px 0 8px rgba(0,0,0,0.1);
-    }
-    #topics-box {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 80vw;
-      height: 20vh;
-      background: #fff;
-      border-top: 2px solid #999;
-      padding: 10px;
-      box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
-      font-size: 14px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-    }
+  /* Node styling */
+  .node rect {
+    stroke: steelblue;
+    stroke-width: 2px;
+    cursor: pointer;
+    rx: 6px;
+    ry: 6px;
+    transition: fill 0.3s;
+  }
 
-    .tool {
-      padding: 5px 10px;
-      margin: 5px;
-      border-radius: 4px;
-      background: #ddd;
-      font-weight: bold;
-    }
+  .node:hover rect {
+    opacity: 0.85;
+    stroke-width: 3px;
+  }
 
-    .highlight {
-      background: orange;
-      color: white;
-    }
-  </style>
+  .node text {
+    font-size: 12px;
+    fill: white;
+    pointer-events: none;
+    text-anchor: middle;
+    alignment-baseline: middle;
+  }
+
+  .link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 2px;
+  }
+
+  /* Bottom panel for details (was topics) */
+#details-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 20vh;
+  background: #fff;
+  border-top: 2px solid #999;
+  padding: 10px;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+  font-size: 14px;
+  overflow-y: auto;
+}
+
+  /* Right panel for topics (was details) */
+#topics-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20vw;
+  height: 75vh;
+  background: #fff;
+  border-left: 2px solid #999;
+  padding: 12px;
+  overflow-y: auto;
+  font-size: 14px;
+  box-shadow: -2px 0 12px rgba(0,0,0,0.15);
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+
+
+
+  .tool {
+    padding: 6px 12px;
+    margin: 4px;
+    border-radius: 6px;
+    background: #ddd;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .tool.highlight {
+    background: orange;
+    color: white;
+  }
+
+  .tool:hover {
+    background: #aaa;
+    color: white;
+  }
+
+  /* Control panel at bottom-left inside SVG container */
+  #control-panel {
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+    background: rgba(255,255,255,0.95);
+    padding: 10px 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-weight: bold;
+    z-index: 1000;
+  }
+
+
+
+  .btn {
+    padding: 6px 12px;
+    background: #ddd;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .btn svg {
+    width: 16px;
+    height: 16px;
+    min-height: 2vh;
+
+  }
+
+  .btn:hover {
+    background: #155a8a;
+  }
+
+</style>
 </head>
 <body>
+
+<div id="svg-container">
   <svg></svg>
-  <div id="topics-box"></div>
-  <div id="details-box"><em>Hover over a leaf node to see details here</em></div>
+  <div id="control-panel">
+    <button class="btn" id="zoom-in" title="Zoom In">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M12 5v14m7-7H5" stroke="black" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <button class="btn" id="zoom-out" title="Zoom Out">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M5 12h14" stroke="black" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
 
-  <script>
-    const width = window.innerWidth * 0.8;
-    const height = window.innerHeight;
-    const svg = d3.select("svg")
-      .attr("width", width)
-      .attr("height", height);
+    <!-- Reset Zoom -->
+    <button class="btn" id="reset-zoom" title="Reset Zoom">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <circle cx="12" cy="12" r="10" stroke="black" stroke-width="2" fill="none"/>
+        <polyline points="12 6 12 12 16 14" stroke="black" stroke-width="2" fill="none"/>
+      </svg>
+    </button>
 
-    const g = svg.append("g").attr("transform", "translate(50,50)");
-    const treeLayout = d3.tree().size([height - 100, width - 200]); // left-to-right
-    let i = 0;
-    let root;
-    let allTopics = new Set();
+    <!-- Reset Tree -->
+    <button class="btn" id="reset-tree" title="Reset Tree">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M4 12a8 8 0 1 1 16 0" stroke="black" stroke-width="2" fill="none"/>
+        <path d="M12 4v8l4 4" stroke="black" stroke-width="2" fill="none"/>
+      </svg>
+    </button>
+  </div>
+</div>
 
-    const levelColors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"];
+<div id="topics-box"></div>
+<div id="details-box"><em>Hover over a leaf node to see details here</em></div>
 
-    d3.json("data.json").then(rawData => {
-      const grouped = d3.group(rawData.resources, d => d.resource);
+<script>
+const container = d3.select("#svg-container");
+const svg = container.select("svg");
+const g = svg.append("g");
 
-      const data = {
-        name: rawData.name,
-        children: Array.from(grouped, ([type, items]) => ({
-          name: type,
-          children: items.map(item => {
-            item.topics.forEach(t => allTopics.add(t)); // collect all tools
-            return {
-              name: item.resource_name,
-              details: {
-                Description: item.description,
-                Subentries: item.data_subentries,
-                URL: item.url
-              },
-              topics: item.topics
-            }
-          })
-        }))
-      };
-    
+// --- Disable wheel zoom, add vertical scroll pan ---
+const zoom = d3.zoom()
+  .scaleExtent([0.5, 3])
+  .on("zoom", (event) => g.attr("transform", event.transform));
 
-      root = d3.hierarchy(data);
-      root.x0 = height / 2;
-      root.y0 = 0;
+svg.call(zoom).on("wheel.zoom", null);
+svg.on("wheel", function(event) {
+  event.preventDefault();
+  const transform = d3.zoomTransform(g.node());
+  const dy = event.deltaY;
+  g.attr("transform", transform.translate(0, -dy));
+});
 
-      root.children.forEach(collapse);
-      update(root);
-      drawToolBox(Array.from(allTopics));
+const width = window.innerWidth * 0.8;
+const height = window.innerHeight * 2;
+// Compact layout: reduce default vertical spacing
+const treeLayout = d3.tree()
+  .nodeSize([35, 260]); // ↓ smaller vertical gap (was 50, 280)
 
-    });
+let i = 0;
+let root;
+let allTopics = new Set();
+const levelColors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"];
 
-    function collapse(d) {
-      if (d.children) {
-        d._children = d.children;
-        d._children.forEach(collapse);
-        d.children = null;
-      }
-    }
+// --- Load Data ---
+d3.json("data.json").then(rawData => {
+  const grouped = d3.group(rawData.resources, d => d.resource);
+  const data = {
+    name: rawData.name,
+    children: Array.from(grouped, ([type, items]) => ({
+      name: type,
+      children: items.map(item => {
+        item.topics.forEach(t => allTopics.add(t));
+        return {
+          name: item.resource_name,
+          details: {
+            Description: item.description,
+            Subentries: item.data_subentries,
+            URL: item.url
+          },
+          topics: item.topics
+        };
+      })
+    }))
+  };
 
-    function update(source) {
-      const treeData = treeLayout(root);
-      const nodes = treeData.descendants();
-      const links = treeData.links();
+  root = d3.hierarchy(data);
+  root.x0 = height / 2;
+  root.y0 = 0;
+  root.children.forEach(collapse);
+  updateTree(root);
+  drawToolBox(Array.from(allTopics));
 
-      // Swap x/y for left-to-right layout
-      nodes.forEach(d => {
-        const temp = d.x;
-        d.x = d.y;
-        d.y = temp;
+  const initialTransform = d3.zoomIdentity.translate(120, window.innerHeight / 4);
+  svg.call(zoom.transform, initialTransform);
+});
+
+function collapse(d) {
+  if (d.children) {
+    d._children = d.children;
+    d._children.forEach(collapse);
+    d.children = null;
+  }
+}
+
+// ✅ --- MAIN TREE UPDATE FUNCTION ---
+function updateTree(source) {
+  const treeData = treeLayout(root);
+  const nodes = treeData.descendants();
+  const links = treeData.links();
+
+  // --- Compact two-column layout for large groups ---
+  root.eachBefore(parent => {
+    if (!parent.children) return;
+    const children = parent.children;
+    if (children.length > 10) {
+      const half = Math.ceil(children.length / 2);
+      const colGap = 200;
+      const rowGap = 50;
+
+      // Align both columns vertically at same midpoint
+      const firstColTop = -((half - 1) * rowGap) / 2;
+      const secondColTop = -((children.length - half - 1) * rowGap) / 2;
+
+      children.slice(0, half).forEach((child, i) => {
+        child.x = parent.x + firstColTop + i * rowGap;
+        child.y = parent.y + 250;
       });
 
-      const node = g.selectAll('g.node')
-        .data(nodes, d => d.id || (d.id = ++i));
+      children.slice(half).forEach((child, i) => {
+        child.x = parent.x + secondColTop + i * rowGap;
+        child.y = parent.y + 250 + colGap;
+      });
+    }
+  });
 
-      const nodeEnter = node.enter().append('g')
-        .attr('class','node')
-        .attr('transform', d => `translate(${source.x0},${source.y0})`)
-        .on('click', (event, d) => {
-          if (d.children) {
-            d._children = d.children;
-            d.children = null;
-          } else {
-            d.children = d._children;
-            d._children = null;
-          }
-          update(d);
-        })
-        .on('mouseover', (event,d) => {
-          if (!d.children && !d._children && d.data.details) {
-            const tooltip = d3.select("#details-box");
-            const details = Object.entries(d.data.details)
-              .map(([k,v]) => `<p><strong>${k}:</strong> ${v}`).join("<br/></p>");
-            tooltip.html(`<strong><u>${d.data.name}</u></strong><br/>${details}`);
+  // --- Swap x/y for horizontal layout ---
+  nodes.forEach(d => {
+    const t = d.x;
+    d.x = d.y;
+    d.y = t;
+  });
 
-            highlightTools(d.data.topics || []);
+  // --- Node JOIN ---
+  const node = g.selectAll("g.node").data(nodes, d => d.id || (d.id = ++i));
 
-          }
-        });
-
-      const rectWidth = 180;
-      const rectHeight = 30;
-
-      nodeEnter.append('rect')
-        .attr('width', rectWidth)
-        .attr('height', rectHeight)
-        .attr('x', -rectWidth/2)
-        .attr('y', -rectHeight/2)
-        .style('fill', d => levelColors[d.depth] || "#888");
-
-      //wordwrap label inside rectangle
-      nodeEnter.append('text')
-        .attr('dy',0)
-        .each(function(d) {
-          const words = d.data.name.split(/\s+/);
-          const lineHeight = 14; // px
-          let tspan = d3.select(this).append('tspan')
-            .attr('x', 0)
-            .attr('y', 0);
-          words.forEach((word, i) => {
-            if (i === 0) {
-              tspan.text(word);
-            } else {
-              tspan = d3.select(this).append('tspan')
-                .attr('x', 0)
-                .attr('y', i * lineHeight)
-                .text(word);
+  const nodeEnter = node.enter()
+    .append("g")
+    .attr("class", "node")
+    .attr("transform", `translate(${source.x0},${source.y0})`)
+    .on("click", (event, d) => {
+      if (d.children) {
+        d._children = d.children;
+        d.children = null;
+      } else {
+        d.children = d._children;
+        d._children = null;
+      }
+      updateTree(d);
+    })
+    .on("mouseover", (event, d) => {
+      if (!d.children && !d._children && d.data.details) {
+        const tooltip = d3.select("#details-box");
+        const details = Object.entries(d.data.details)
+          .map(([k, v]) => {
+            if (k === "URL" && v) {
+              return `<p><strong>${k}:</strong> <a href="${v}" target="_blank" style="color:blue; text-decoration:underline;">${v}</a></p>`;
             }
-          });
-        });
+            return `<p><strong>${k}:</strong> ${v}</p>`;
+          })
+          .join("");
+        tooltip.html(`<strong><u>${d.data.name}</u></strong><br/>${details}`);
+        highlightTopics(d.data.topics || []);
+      }
+    });
 
-      const nodeUpdate = nodeEnter.merge(node);
-      nodeUpdate.transition().duration(500)
-        .attr('transform', d => `translate(${d.x},${d.y})`);
+  // --- Text wrapping and dynamic box size ---
+  const rectWidth = 180, lineHeight = 14, maxWordsPerLine = 3;
 
-      nodeUpdate.select('rect')
-        .style('fill', d => levelColors[d.depth] || "#888");
+  nodeEnter.append("rect")
+  .attr("width", rectWidth)
+  .attr("x", -rectWidth / 2)
+  .attr("rx", 6)
+  .attr("ry", 6)
+  .attr("stroke", "steelblue")
+  .attr("stroke-width", 2)
+  .attr("fill", d => levelColors[d.depth] || "#888");
 
-      const nodeExit = node.exit().transition()
-        .duration(500)
-        .attr('transform', d => `translate(${source.x},${source.y})`)
-        .remove();
-      nodeExit.select('rect').attr('width',0).attr('height',0);
-      nodeExit.select('text').style('fill-opacity',1e-6);
+nodeEnter.append("text")
+.attr("dy", 3)
+  .each(function(d) {
+    const words = d.data.name.split(/[\s,;.]+/);
+    const lines = [];
+    for (let i = 0; i < words.length; i += maxWordsPerLine)
+      lines.push(words.slice(i, i + maxWordsPerLine).join(" "));
 
-      const link = g.selectAll('path.link')
-        .data(links, d => d.target.id);
+    const text = d3.select(this);
+    const totalTextHeight = lines.length * lineHeight;
+    const rectHeight = Math.max(28, totalTextHeight + 14);
 
-      const linkEnter = link.enter().insert('path','g')
-        .attr('class','link')
-        .attr('d', d => { const o={x:source.x0,y:source.y0}; return diagonal(o,o); });
+    // Center the rect vertically
+    d3.select(this.parentNode).select("rect")
+      .attr("height", rectHeight)
+      .attr("y", -rectHeight / 2);
 
-      const linkUpdate = linkEnter.merge(link);
-      linkUpdate.transition().duration(500).attr('d', d => diagonal(d.source,d.target));
+    // Compute start y so text block is vertically centered
+    const startY = -(totalTextHeight / 2) + lineHeight / 2;
 
-      link.exit().transition().duration(500)
-        .attr('d', d => { const o={x:source.x,y:source.y}; return diagonal(o,o); })
-        .remove();
+    lines.forEach((line, i) => {
+      text.append("tspan")
+        .attr("x", 0)
+        .attr("y", startY + i * lineHeight)
+        .text(line);
+    });
+  });
 
-      nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
-    }
 
-    function diagonal(s,d){
-      return `M ${s.x} ${s.y}
-              C ${(s.x+d.x)/2} ${s.y},
-                ${(s.x+d.x)/2} ${d.y},
-                ${d.x} ${d.y}`;
-    }
-    function drawToolBox(topics) {
-      const box = d3.select("#topics-box");
-      box.selectAll("div.tool")
-        .data(topics)
-        .enter()
-        .append("div")
-        .attr("class","tool")
-        .attr("id", d => "tool-"+d)
-        .text(d => d);
-    }
-    function highlightTools(activeTools) {
-      d3.selectAll("#topics-box .tool")
-        .classed("highlight", d => activeTools.includes(d));
-    }
-  </script>
+  const nodeUpdate = nodeEnter.merge(node);
+  nodeUpdate.transition().duration(400)
+    .attr("transform", d => `translate(${d.x},${d.y})`);
+  nodeUpdate.select("rect").style("fill", d => levelColors[d.depth] || "#888");
+
+  node.exit()
+    .transition().duration(400)
+    .attr("transform", d => `translate(${source.x},${source.y})`)
+    .remove();
+
+  // --- LINKS ---
+  const link = g.selectAll("path.link").data(links, d => d.target.id);
+  const linkEnter = link.enter()
+    .insert("path", "g")
+    .attr("class", "link")
+    .attr("d", d => {
+      const o = { x: source.x0, y: source.y0 };
+      return diagonal(o, o);
+    });
+  linkEnter.merge(link)
+    .transition().duration(400)
+    .attr("d", d => diagonal(d.source, d.target));
+  link.exit()
+    .transition().duration(400)
+    .attr("d", d => {
+      const o = { x: source.x, y: source.y };
+      return diagonal(o, o);
+    })
+    .remove();
+
+  nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
+
+  const maxY = d3.max(nodes, d => d.y);
+  svg.attr("height", Math.max(maxY + 200, window.innerHeight));
+}
+
+function diagonal(s, d) {
+  return `M ${s.x} ${s.y} C ${(s.x+d.x)/2} ${s.y}, ${(s.x+d.x)/2} ${d.y}, ${d.x} ${d.y}`;
+}
+
+function drawToolBox(topics) {
+  const box = d3.select("#topics-box");
+  box.selectAll("div.tool").data(topics).enter().append("div")
+    .attr("class", "tool")
+    .attr("id", d => "tool-" + d)
+    .text(d => d);
+}
+
+function highlightTopics(activeTopics) {
+  d3.selectAll("#topics-box .tool").classed("highlight", d => activeTopics.includes(d));
+}
+
+// --- Controls ---
+d3.select("#zoom-in").on("click", ()=> svg.transition().duration(400).call(zoom.scaleBy, 1.2));
+d3.select("#zoom-out").on("click", ()=> svg.transition().duration(400).call(zoom.scaleBy, 0.8));
+d3.select("#reset-zoom").on("click", ()=> svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity.translate(120, window.innerHeight/4)));
+d3.select("#reset-tree").on("click", ()=> {
+  root.children.forEach(collapse);
+  updateTree(root);
+  svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity.translate(120, window.innerHeight/4));
+  highlightTopics([]);
+});
+</script>
+
+
 </body>
 </html>
