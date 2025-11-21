@@ -12,19 +12,41 @@
     background: #f5f5f5;
   }
 
+  #svg-container {
+    width: 76vw;
+    height: calc(100vh - 60px - 20vh); /* header + topics box */
+    float: left;
+    background: linear-gradient(to bottom, #eaf2fb, #ffffff);
+    overflow: auto; /* enable both vertical & horizontal scrolling */
+    position: relative;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    margin-top: 60px; /* account for header */
 
+    /* Optional: smoother scrolling */
+    scroll-behavior: smooth;
+      margin-top: 60px; /* adjust if needed to clear the control panel */
 
-#svg-container {
-  width: 80vw;
-  height: calc(100vh - 60px - 20vh); /* header + topics box */
-  float: left;
-  background: linear-gradient(to bottom, #eaf2fb, #ffffff);
-  overflow-y: auto;  /* enable vertical scroll */
-  overflow-x: hidden;
-  position: relative;
-  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
-  margin-top: 60px; /* account for header */
+  }
+
+  /* Optional: subtle custom scrollbar style for WebKit browsers */
+#svg-container::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
+
+#svg-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.25);
+  border-radius: 6px;
+}
+
+#svg-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0,0,0,0.4);
+}
+
+#svg-container::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.05);
+}
+
 
 
   svg {
@@ -45,6 +67,11 @@
 
   .node:hover rect {
     opacity: 0.85;
+    stroke-width: 3px;
+  }
+
+  .node rect.hovered {
+    stroke: red;
     stroke-width: 3px;
   }
 
@@ -82,7 +109,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 20vw;
+  width: 22vw;
   height: 75vh;
   background: #fff;
   border-left: 2px solid #999;
@@ -121,18 +148,18 @@
 
   /* Control panel at bottom-left inside SVG container */
   #control-panel {
-    position: absolute;
-    bottom: 30px;
-    left: 10px;
+    position: absolute;       /* stay fixed relative to page */
+    top: 10px;                /* distance from top of window */
+  left: 10px;               /* align to left edge */
     background: rgba(255,255,255,0.95);
     padding: 10px 12px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;      /* horizontal layout now */
     gap: 6px;
     font-weight: bold;
-    z-index: 1000;
+  z-index: 2000;  /* higher than #topics-box (was 1000) */
   }
 
 
@@ -165,10 +192,7 @@
 </style>
 </head>
 <body>
-
-<div id="svg-container">
-  <svg></svg>
-  <div id="control-panel">
+<!--<div id="control-panel">
     <button class="btn" id="zoom-in" title="Zoom In">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
         <path d="M12 5v14m7-7H5" stroke="black" stroke-width="2" stroke-linecap="round"/>
@@ -179,16 +203,14 @@
         <path d="M5 12h14" stroke="black" stroke-width="2" stroke-linecap="round"/>
       </svg>
     </button>
-
-    <!-- Reset Zoom -->
-    <button class="btn" id="reset-zoom" title="Reset Zoom">
+  
+ <button class="btn" id="reset-zoom" title="Reset Zoom">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
         <circle cx="12" cy="12" r="10" stroke="black" stroke-width="2" fill="none"/>
         <polyline points="12 6 12 12 16 14" stroke="black" stroke-width="2" fill="none"/>
       </svg>
     </button>
 
-    <!-- Reset Tree -->
     <button class="btn" id="reset-tree" title="Reset Tree">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
         <path d="M4 12a8 8 0 1 1 16 0" stroke="black" stroke-width="2" fill="none"/>
@@ -196,6 +218,10 @@
       </svg>
     </button>
   </div>
+-->
+<div id="svg-container">
+  <svg></svg>
+  
 </div>
 
 <div id="topics-box"></div>
@@ -211,13 +237,9 @@ const zoom = d3.zoom()
   .scaleExtent([0.5, 3])
   .on("zoom", (event) => g.attr("transform", event.transform));
 
-svg.call(zoom).on("wheel.zoom", null);
-svg.on("wheel", function(event) {
-  event.preventDefault();
-  const transform = d3.zoomTransform(g.node());
-  const dy = event.deltaY;
-  g.attr("transform", transform.translate(0, -dy));
-});
+svg.call(zoom).on("wheel.zoom", null); // disable wheel zoom only, not panning
+
+
 
 const width = window.innerWidth * 0.8;
 const height = window.innerHeight * 2;
@@ -238,7 +260,7 @@ d3.json("data/glyco_resources.json").then(rawData => {
     children: Array.from(grouped, ([type, items]) => ({
       name: type,
       children: items.map(item => {
-        item.topics.forEach(t => allTopics.add(t));
+        item.topic_subentries.forEach(t => allTopics.add(t));
         return {
           name: item.resource_name,
           details: {
@@ -246,7 +268,7 @@ d3.json("data/glyco_resources.json").then(rawData => {
             Subentries: item.data_subentries,
             URL: item.url
           },
-          topics: item.topics
+          topics: item.topic_subentries
         };
       })
     }))
@@ -283,7 +305,7 @@ function updateTree(source) {
     const children = parent.children;
     if (children.length > 10) {
       const half = Math.ceil(children.length / 2);
-      const colGap = 200;
+      const colGap = 230;
       const rowGap = 50;
 
       // Align both columns vertically at same midpoint
@@ -317,17 +339,30 @@ function updateTree(source) {
     .attr("class", "node")
     .attr("transform", `translate(${source.x0},${source.y0})`)
     .on("click", (event, d) => {
-      if (d.children) {
-        d._children = d.children;
-        d.children = null;
-      } else {
-        d.children = d._children;
-        d._children = null;
-      }
-      updateTree(d);
-    })
-    .on("mouseover", (event, d) => {
-      if (!d.children && !d._children && d.data.details) {
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  } else {
+    d.children = d._children;
+    d._children = null;
+  }
+  updateTree(d);
+
+  // 🔹 Scroll the container so expanded nodes are visible
+  const container = document.getElementById("svg-container");
+  container.scrollTop = 0; // scroll to top smoothly
+})
+  .on("mouseover", (event, d) => {
+  // Only apply hover highlight to leaf nodes
+    if (!d.children && !d._children) {
+      // Remove highlight from all other nodes
+      d3.selectAll(".node rect").classed("hovered", false);
+
+      // Highlight the current leaf node
+      d3.select(event.currentTarget).select("rect").classed("hovered", true);
+
+      // Update details and topics
+      if (d.data.details) {
         const tooltip = d3.select("#details-box");
         const details = Object.entries(d.data.details)
           .map(([k, v]) => {
@@ -340,7 +375,12 @@ function updateTree(source) {
         tooltip.html(`<strong><u>${d.data.name}</u></strong><br/>${details}`);
         highlightTopics(d.data.topics || []);
       }
-    });
+    }
+  })
+  .on("mouseout", (event, d) => {
+    // Do nothing — keep the highlight on the last hovered leaf
+  });
+
 
   // --- Text wrapping and dynamic box size ---
   const rectWidth = 180, lineHeight = 14, maxWordsPerLine = 3;
@@ -415,8 +455,33 @@ nodeEnter.append("text")
 
   nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
 
-  const maxY = d3.max(nodes, d => d.y);
-  svg.attr("height", Math.max(maxY + 200, window.innerHeight));
+  // Compute vertical bounds of all visible nodes
+// Compute vertical bounds of all visible nodes
+const minY = d3.min(nodes, d => d.y);
+const maxY = d3.max(nodes, d => d.y);
+
+// Padding
+const topPadding = 5;
+const bottomPadding = 200;
+
+// Calculate total height to fit all nodes + padding
+const totalHeight = (maxY - minY) + (topPadding + bottomPadding)*2;
+
+// Resize SVG height so scrollbars adapt correctly
+svg.attr("height", Math.max(totalHeight, window.innerHeight));
+
+// Align tree so topmost node sits 5px from top
+const currentTransform = d3.zoomTransform(g.node());
+//const offsetY = -minY + topPadding;
+const leftPadding = 5;
+
+const offsetY = -minY * currentTransform.k + 5;
+
+
+g.attr("transform", currentTransform.translate(currentTransform.x, offsetY));
+
+
+
 }
 
 function diagonal(s, d) {
@@ -431,14 +496,62 @@ function drawToolBox(topics) {
     .text(d => d);
 }
 
+//scroll to the first hightlighted
+/*function highlightTopics(activeTopics) {
+  const box = d3.select("#topics-box");
+  const tools = box.selectAll(".tool");
+
+  tools.classed("highlight", d => activeTopics.includes(d));
+
+  // Auto-scroll to the first highlighted topic
+  const firstHighlighted = box.select(".tool.highlight").node();
+  if (firstHighlighted) {
+    firstHighlighted.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}
+*/
+//move the highlighted topics to top
 function highlightTopics(activeTopics) {
-  d3.selectAll("#topics-box .tool").classed("highlight", d => activeTopics.includes(d));
+  const box = d3.select("#topics-box");
+  const allTools = box.selectAll(".tool");
+
+  allTools.classed("highlight", d => activeTopics.includes(d));
+
+  // Move highlighted topics to the top
+  const highlighted = allTools.filter(d => activeTopics.includes(d));
+  highlighted.each(function() {
+    this.parentNode.prepend(this);
+  });
 }
 
 // --- Controls ---
-d3.select("#zoom-in").on("click", ()=> svg.transition().duration(400).call(zoom.scaleBy, 1.2));
-d3.select("#zoom-out").on("click", ()=> svg.transition().duration(400).call(zoom.scaleBy, 0.8));
-d3.select("#reset-zoom").on("click", ()=> svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity.translate(120, window.innerHeight/4)));
+// Zoom buttons: keep top-left alignment correct
+d3.select("#zoom-in").on("click", () => {
+  svg.transition().duration(400).call(
+    zoom.scaleBy,
+    1.2,
+    [0, 0]  // zoom relative to top-left
+  );
+});
+
+d3.select("#zoom-out").on("click", () => {
+  svg.transition().duration(400).call(
+    zoom.scaleBy,
+    0.8,
+    [0, 0]  // zoom relative to top-left
+  );
+});
+
+d3.select("#reset-zoom").on("click", () => {
+  // Reset to top-left, keeping dynamic vertical offset for top node
+  const topNodeY = d3.min(root.descendants(), d => d.y);
+  const offsetY = -topNodeY + 5;  // 5px top padding
+  svg.transition().duration(400).call(
+    zoom.transform,
+    d3.zoomIdentity.translate(0, offsetY).scale(1)
+  );
+});
+
 d3.select("#reset-tree").on("click", ()=> {
   root.children.forEach(collapse);
   updateTree(root);
@@ -450,4 +563,3 @@ d3.select("#reset-tree").on("click", ()=> {
 
 </body>
 </html>
-
