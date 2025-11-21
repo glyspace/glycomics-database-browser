@@ -231,7 +231,7 @@ let allTopics = new Set();
 const levelColors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"];
 
 // --- Load Data ---
-d3.json("data.json").then(rawData => {
+d3.json("data/glyco_resources.json").then(rawData => {
   const grouped = d3.group(rawData.resources, d => d.resource);
   const data = {
     name: rawData.name,
@@ -450,3 +450,4 @@ d3.select("#reset-tree").on("click", ()=> {
 
 </body>
 </html>
+
