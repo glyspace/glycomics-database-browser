@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Glyspace</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="main">
+
+        <h1>Welcome to Glyspace!</h1>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search resources...">
+            <button id="searchBtn">Search</button>
+        </div>
+
+        <div id="cards" class="cards-grid"></div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div id="sidebar" class="cards-grid"></div>
+       
+        <h3>Resource Type</h3>
+        <div class="filter-group" id="resourceTypeFilters">
+            
+        </div>
+
+         <h3>Data Type</h3>
+        <div class="filter-group" id="dataTypeFilters">
+        </div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
