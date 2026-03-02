@@ -2,7 +2,7 @@ let allData = [];
 let selectedDataType = null;
 let selectedResourceType = null;
 
-d3.json("data.json").then(function(data) {
+d3.json("data/glyco_resources.json").then(function(data) {
     allData = data.resources;   // store the array
     renderCards(allData);
     renderResourceTypeSideBar(data);
@@ -198,3 +198,4 @@ d3.selectAll("#resourceTypeFilters .filter-btn")
     });
 
 d3.select("#searchBtn").on("click", applyFilters);
+
