@@ -18,8 +18,10 @@
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Search resources...">
             <button id="searchBtn">Search</button>
+            
         </div>
-
+        <div id="resultsCount">Showing <span id="count"></span> resources</div>
+        <br/>
         <div id="cards" class="cards-grid"></div>
 
     </div>
@@ -39,6 +41,21 @@
 
     </div>
 
+</div>
+
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <span class="popup-close">&times;</span>
+    <div class="popup-header">
+      <h3 id="popup-title"></h3>
+      <img id="popup-logo" class="popup-logo" src="" >
+    </div>
+    <p><strong>Resource Type:</strong> <span id="popup-resourcetype"></span></p>
+    <p><strong>Datatype:</strong> <span id="popup-datatype"></span></p>
+    <p><strong>Description:</strong></p>
+    <p id="popup-description"></p>
+    <p><a href="" id="popup-url" target="_blank">Visit Resource</a></p>
+  </div>
 </div>
 
 <script src="script.js"></script>

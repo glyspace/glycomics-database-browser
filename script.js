@@ -1,26 +1,34 @@
 let allData = [];
 let selectedDataType = null;
 let selectedResourceType = null;
+let searchTerm = "";
 
-d3.json("data/glyco_resources.json").then(function(data) {
-    allData = data.resources;   // store the array
+d3.json("data/glyco.json").then(function(data) {
+    allData = data.resources;
+
     renderCards(allData);
     renderResourceTypeSideBar(data);
     renderDataTypeSideBar(data);
 });
 
 
+/* -------------------- CARD RENDERING -------------------- */
+
 function renderCards(data) {
-    console.log("renderCards received:", data);
-    console.log("Is array?", Array.isArray(data));
 
     const cards = d3.select("#cards")
         .selectAll(".card")
         .data(data, d => d.resource_name)
         .join("div")
-        .attr("class", "card");
+        .attr("class", "card")
+        .on("click", function(event, d) {
+            // d is the bound data
+            console.log(d.resource);  // now it prints the resource
+            openPopup(d);             // pass data to popup
+        });
 
-    cards.html(""); // clear existing content cleanly
+
+    cards.html("");
 
     cards.append("img")
         .attr("class", "logo");
@@ -32,7 +40,6 @@ function renderCards(data) {
         .attr("class", "description");
 
     desc.each(function(d) {
-        console.log('processing description for', d.resource_name);
 
         const fullText = d.description;
         const truncated = fullText.length > 120
@@ -51,8 +58,9 @@ function renderCards(data) {
         const link = p.append("span")
             .attr("class", "see-more")
             .text(" See more")
-            .on("click", function() {
-
+            .on("click",  function(event, d) {
+                event.stopPropagation();  // ⚡ Prevent popup from opening
+                            
                 const expanded = link.text() === " See less";
 
                 if (!expanded) {
@@ -66,136 +74,177 @@ function renderCards(data) {
                 }
             });
     });
+    d3.select("#count").text(data.length);
+
+//        d3.select("#resultsCount").text(`${filtered.length} result${filtered.length !== 1 ? "s" : ""}`);
+
 }
 
 
+/* -------------------- DATA TYPE SIDEBAR -------------------- */
 
 function renderDataTypeSideBar(data) {
-    // 1️⃣ Extract all resource types
-    const allTopics = data.resources.map(d => d.topic_subentries);
 
-    // 2️⃣ Flatten the array of arrays into a single array
-    const flattenedTopics = allTopics.flat();  
+   const allTopics = data.resources.map(d => d.datatype);
 
-    // 3️⃣ Keep only unique values
-    const uniqueTopics = Array.from(new Set(flattenedTopics));
+    //const flattenedTopics = allTopics.flat();
 
-    // 3️⃣ Bind unique values to buttons
+    //const uniqueTopics = Array.from(new Set(flattenedTopics)); 
+
+
+    const flattenedTopics = data.resources.flatMap(d => {
+        if (!d.datatype) return [];
+
+        if (Array.isArray(d.datatype)) {
+            return d.datatype.map(t => t.trim());
+        }
+
+        return d.datatype.split(",").map(t => t.trim());
+    });
+
+    const uniqueTopics = Array.from(new Set(flattenedTopics)).sort(); 
+
     const buttons = d3.select("#dataTypeFilters")
         .selectAll("button")
-        .data(uniqueTopics, d => d); // use value itself as key
+        .data(uniqueTopics, d => d);
 
-    // 4️⃣ Remove old buttons
     buttons.exit().remove();
 
-    // 5️⃣ Update existing buttons (if needed)
     buttons.text(d => d);
 
-    // 6️⃣ Add new buttons
     buttons.enter()
         .append("button")
         .attr("class", "filter-btn")
         .text(d => d)
-        .on("click", d => {
-            console.log("Clicked:", d);
-            alert(`You clicked ${d}`);
-        });
+        .on("click", function(event, d) {
 
-   
+            const btn = d3.select(this);
+
+            selectedDataType = selectedDataType === d ? null : d;
+
+            d3.selectAll("#dataTypeFilters .filter-btn")
+                .classed("active", false);
+
+            if (selectedDataType) btn.classed("active", true);
+
+            applyFilters();
+        });
 }
+
+
+/* -------------------- RESOURCE TYPE SIDEBAR -------------------- */
 
 function renderResourceTypeSideBar(data) {
-    // 1️⃣ Extract all resource types
+
     const allResources = data.resources.map(d => d.resource);
 
-    // 2️⃣ Keep only unique values
     const uniqueResources = Array.from(new Set(allResources));
-    console.log(uniqueResources);
 
-    // 3️⃣ Bind unique values to buttons
     const buttons = d3.select("#resourceTypeFilters")
         .selectAll("button")
-        .data(uniqueResources, d => d); // use value itself as key
+        .data(uniqueResources, d => d);
 
-    // 4️⃣ Remove old buttons
     buttons.exit().remove();
 
-    // 5️⃣ Update existing buttons (if needed)
     buttons.text(d => d);
 
-    // 6️⃣ Add new buttons
     buttons.enter()
         .append("button")
         .attr("class", "filter-btn")
         .text(d => d)
-        .on("click", d => {
-            console.log("Clicked:", d);
-            alert(`You clicked ${d}`);
-        });
+        .on("click", function(event, d) {
 
-   
+            const btn = d3.select(this);
+
+            selectedResourceType = selectedResourceType === d ? null : d;
+
+            d3.selectAll("#resourceTypeFilters .filter-btn")
+                .classed("active", false);
+
+            if (selectedResourceType) btn.classed("active", true);
+
+            applyFilters();
+        });
 }
 
+
+/* -------------------- SEARCH BUTTON -------------------- */
+
+d3.select("#searchBtn").on("click", function() {
+
+    searchTerm = d3.select("#searchInput")
+        .property("value")
+        .toLowerCase();
+
+    applyFilters();
+});
+
+
+/* -------------------- FILTER LOGIC -------------------- */
 
 function applyFilters() {
 
     let filtered = allData;
+    
 
+    /* filter by data type */
     if (selectedDataType) {
         filtered = filtered.filter(d =>
-            d.dataType.includes(selectedDataType)
+            d.datatype.toLowerCase().includes(selectedDataType.toLowerCase())
         );
     }
 
+    /* filter by resource type */
     if (selectedResourceType) {
         filtered = filtered.filter(d =>
-            d.resourceType === selectedResourceType
+            d.resource === selectedResourceType
         );
     }
 
-    const searchTerm = d3.select("#searchInput").property("value").toLowerCase();
-
+    /* search across multiple attributes */
     if (searchTerm) {
         filtered = filtered.filter(d =>
             d.resource_name.toLowerCase().includes(searchTerm) ||
-            d.description.toLowerCase().includes(searchTerm)
+            d.description.toLowerCase().includes(searchTerm) ||
+            d.resource.toLowerCase().includes(searchTerm) ||
+            d.datatype.toLowerCase().includes(searchTerm)
+            //d.topic_subentries.join(" ").toLowerCase().includes(searchTerm)
         );
     }
 
     renderCards(filtered);
+
+        
 }
 
-d3.selectAll("#dataTypeFilters .filter-btn")
-    .on("click", function() {
+function openPopup(d) {
+    d3.select("#popup").style("display", "block");
 
-        const btn = d3.select(this);
-        const type = btn.attr("data-type");
+    d3.select("#popup-title").text(d.resource_name);
 
-        selectedDataType = selectedDataType === type ? null : type;
+    // Topics as comma-separated list
+    d3.select("#popup-resourcetype").text(d.resource);
 
-        d3.selectAll("#dataTypeFilters .filter-btn")
-            .classed("active", false);
+    d3.select("#popup-datatype").text(d.datatype);
 
-        if (selectedDataType) btn.classed("active", true);
+    d3.select("#popup-description").text(d.description);
 
-        applyFilters();
-    });
+    d3.select("#popup-logo")
+        .attr("class", "logo");
+    
+    d3.select("#popup-url")
+        .attr("href", d.url[0])
+        .text("Visit Resource");
+}
 
-d3.selectAll("#resourceTypeFilters .filter-btn")
-    .on("click", function() {
+// Close popup
+d3.select(".popup-close").on("click", () => {
+    d3.select("#popup").style("display", "none");
+});
 
-        const btn = d3.select(this);
-        const type = btn.attr("data-type");
-
-        selectedResourceType = selectedResourceType === type ? null : type;
-
-        d3.selectAll("#resourceTypeFilters .filter-btn")
-            .classed("active", false);
-
-        if (selectedResourceType) btn.classed("active", true);
-
-        applyFilters();
-    });
-
-d3.select("#searchBtn").on("click", applyFilters);
-
+// Close popup if clicking outside the content
+d3.select("#popup").on("click", function(event) {
+    if (event.target.id === "popup") {
+        d3.select("#popup").style("display", "none");
+    }
+});
