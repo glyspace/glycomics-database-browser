@@ -3,7 +3,7 @@ let selectedDataType = null;
 let selectedResourceType = null;
 let searchTerm = "";
 
-d3.json("data/glyco.json").then(function(data) {
+d3.json("data/glyco_resources.json").then(function(data) {
     allData = data.resources;
 
     renderCards(allData);
